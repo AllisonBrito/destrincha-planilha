@@ -1,21 +1,17 @@
-import itertools
-from operator import le
-from numpy import positive
 import pandas as pd
-from pandas.core.frame import DataFrame
-from numpy import positive
-import pandas as pd
-from pandas.core.frame import DataFrame
+import PySimpleGUI as sg
 
-def le_planilha():
-    while True:
-        try:
-            caminho_planilha = input('Defina o caminho da planilha: ')
-            return pd.read_excel(caminho_planilha)
-        except:
-            print('Arquivo não encontrado.')
+def separa_nome(caminho):
+  separa_extensao = caminho.split('.')
+  separa_barra = separa_extensao[0].split('/')
+  return separa_barra[-1]
 
-planilha_dataframe = le_planilha()
+sg.theme('Dark Blue 3')
+caminho_planilha = sg.popup_get_file('Defina o caminho da planilha')
+
+nome_arquivo = separa_nome(caminho_planilha)
+
+planilha_dataframe = pd.read_excel(caminho_planilha)
 
 nome_colunas = planilha_dataframe.columns
 
@@ -38,6 +34,6 @@ for linha in range(len(planilha_dataframe)):
 
 planilha_refaturada = DataFrame(dic)
 
-planilha_refaturada.to_excel('SUA NOVA TABELA.xlsx', sheet_name='DADOS')
+planilha_refaturada.to_excel(f'{nome_arquivo} v2.xlsx', sheet_name='DADOS')
 
-print('Arquivo Salvo!!!')
+sg.popup('Arquivo salvo!)
