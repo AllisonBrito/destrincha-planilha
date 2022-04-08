@@ -1,3 +1,4 @@
+from ast import Str
 import pandas as pd
 import PySimpleGUI as sg
 
@@ -8,6 +9,9 @@ def separa_nome(caminho):
 
 sg.theme('Dark Blue 3')
 caminho_planilha = sg.popup_get_file('Defina o caminho da planilha')
+
+if caminho_planilha is None:
+  quit()
 
 nome_arquivo = separa_nome(caminho_planilha)
 
