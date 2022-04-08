@@ -32,8 +32,8 @@ for linha in range(len(planilha_dataframe)):
                     dic[f'{nome_colunas[coluna]}'] += [item.strip()]
                     break
 
-planilha_refaturada = DataFrame(dic)
+planilha_refaturada = pd.DataFrame(dic)
 
 planilha_refaturada.to_excel(f'{nome_arquivo} v2.xlsx', sheet_name='DADOS')
 
-sg.popup('Arquivo salvo!)
+sg.popup('Arquivo salvo!')
